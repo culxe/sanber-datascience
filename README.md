@@ -1,6 +1,7 @@
 # Data Science Bootcamp Sanbercode
 
 Final Project Report - [Home Purchase Recommendations](https://github.com/culxe/sanber-datascience/blob/main/final%20project/Laporan%20Final%20Project%20Data%20Science.pdf)
+___
 
 ## House Purchase Recommendation
 
@@ -64,15 +65,28 @@ Correlation between key features:
 
 - Recommendations are made based on price_per_sqft calculations.
 
+```
+built_after_1990 = df_cleaned[df_cleaned['yr_built'] >= 1990]
+renovated_after_2000 = df_cleaned[(df_cleaned['yr_built'] < 1990) & (df_cleaned['yr_renovated'] > 2000)]
+filtered_houses = pd.concat([built_after_1990, renovated_after_2000])
+filtered_houses['price_per_sqft'] = filtered_houses['price'] / filtered_houses['sqft_living']
+recommended_houses = filtered_houses.sort_values(by=['price', 'price_per_sqft']).head(10)
+
+```
+
+
 ### Results & Output
 
 The model successfully identified houses with a more efficient price per square foot ratio.
 
 Key visualizations:
 
-Price correlation with main house features.
+- Price correlation with main house features.
 
-Distribution of price per square foot to determine reasonably priced houses.
+- Distribution of price per square foot to determine reasonably priced houses.
+
+![image](https://github.com/user-attachments/assets/f571bd40-3c29-4d35-8744-c5d8dc4d2463)
+
 
 
 📁 Dataset & Code: Available in the notebook finalproject_report.ipynb.
